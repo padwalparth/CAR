@@ -1,0 +1,6 @@
+# SIH 2026 Core Pipeline Dependencies
+# Minimal runtime environment for mock mode, test suite, and headless pipeline.
+
+numpy>=1.24.0
+pillow>=9.0.0
+pyyaml>=6.0

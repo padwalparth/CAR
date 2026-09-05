@@ -1,0 +1,21 @@
+{
+  "frames_processed": 1,
+  "successful_frames": 1,
+  "failed_frames": 0,
+  "elapsed_seconds": 7.746,
+  "average_latency_ms": 845.2,
+  "min_latency_ms": 845.2,
+  "max_latency_ms": 845.2,
+  "average_fps": 1.18,
+  "failures": {
+    "road": 0,
+    "traffic": 0,
+    "pothole": 0
+  },
+  "scene_aggregates": {
+    "total_potholes_detected": 1,
+    "total_traffic_objects_detected": 5
+  },
+  "simulation_enabled": true,
+  "visualization_enabled": true
+}

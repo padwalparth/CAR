@@ -1,0 +1,10 @@
+# SIH 2026 Simulation Dependencies
+# NOTE: The default MockSimulator has ZERO external dependencies.
+# External simulator integrations require environment-specific packages:
+
+# SUMO Co-simulation (Traffic Control Interface)
+# traci>=1.18.0
+
+# CARLA Autonomous Driving Simulator
+# Install the exact Python wheel matching your CARLA installation:
+# carla>=0.9.14

@@ -1,0 +1,58 @@
+{
+  "environment": {
+    "python_version": "3.11.16",
+    "architecture": "64bit (AMD64)",
+    "os": "Windows 10",
+    "torch_version": "2.14.0+cpu",
+    "cuda_available": false,
+    "cuda_device_name": "N/A",
+    "cuda_device_count": 0,
+    "torchvision_version": "0.29.0+cpu",
+    "timm_version": "1.0.29",
+    "ultralytics_version": "8.4.140",
+    "onnxruntime_version": "1.29.0",
+    "onnxruntime_providers": [
+      "AzureExecutionProvider",
+      "CPUExecutionProvider"
+    ],
+    "opencv_version": "5.0.0"
+  },
+  "benchmarks": {
+    "iterations_measured": 20,
+    "warmup_iterations": 5,
+    "cpu_benchmark": {
+      "road_segmentation": {
+        "mean_ms": 29.69,
+        "min_ms": 26.91,
+        "max_ms": 42.13,
+        "std_ms": 3.85
+      },
+      "traffic_detection": {
+        "mean_ms": 441.07,
+        "min_ms": 337.75,
+        "max_ms": 580.8,
+        "std_ms": 68.72
+      },
+      "pothole_detection": {
+        "mean_ms": 57.57,
+        "min_ms": 36.81,
+        "max_ms": 95.13,
+        "std_ms": 19.33
+      },
+      "perception_fusion": {
+        "mean_ms": 0.48,
+        "min_ms": 0.34,
+        "max_ms": 1.01,
+        "std_ms": 0.13
+      },
+      "end_to_end": {
+        "mean_ms": 529.68,
+        "min_ms": 461.84,
+        "max_ms": 664.68,
+        "std_ms": 58.21
+      },
+      "fps": 1.89
+    },
+    "cuda_benchmark": "N/A (PyTorch installed with CPU-only runtime; CUDA benchmark not executed)"
+  }
+}

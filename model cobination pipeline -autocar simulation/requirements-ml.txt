@@ -1,0 +1,22 @@
+# SIH 2026 Real ML Model Dependencies
+# Required ONLY when executing real neural network models (--mock-models is omitted).
+
+# Core dependencies
+-r requirements-core.txt
+
+# Road Segmentation Model (U-Net ONNX runtime)
+onnxruntime>=1.15.0
+
+# Traffic Detection Model (YOLOv8 trained on IDD)
+ultralytics>=8.0.0
+
+# Pothole Detection Model (Res2Net-50d PyTorch checkpoint)
+torch>=2.0.0
+torchvision>=0.15.0
+timm>=0.9.0
+
+# Video file decoding and optional live display (optional, Pillow handles images)
+opencv-python>=4.7.0
+
+# Optional: Alternative Keras backend for road segmentation (.h5)
+# tensorflow>=2.10.0

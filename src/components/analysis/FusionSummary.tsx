@@ -1,0 +1,120 @@
+import React from 'react';
+import { FusionResult } from '../../types/inference';
+import { ShieldAlert, ShieldCheck, AlertTriangle, HelpCircle, Info } from 'lucide-react';
+
+interface FusionSummaryProps {
+  fusion?: FusionResult;
+}
+
+export const FusionSummary: React.FC<FusionSummaryProps> = ({ fusion }) => {
+  if (!fusion || fusion.status === 'not_connected' || fusion.status === 'waiting') {
+    return (
+      <div className="neo-card p-5 flex flex-col items-center justify-center text-center bg-[#FFFFFF]">
+        <div className="p-3 rounded bg-[#FFD84D] border-2 border-[#111111] shadow-[2px_2px_0px_#111111] text-[#111111] mb-3">
+          <HelpCircle className="w-6 h-6 stroke-[2.5]" />
+        </div>
+        <h4 className="text-sm font-bold text-[#111111] uppercase tracking-wide font-display">SAFETY ASSESSMENT UNAVAILABLE</h4>
+        <p className="text-xs text-[#555555] font-medium mt-1 max-w-xs leading-relaxed">
+          {fusion?.status === 'not_connected'
+            ? 'Connect the Fusion Engine service to generate road safety scores & hazard warnings.'
+            : 'Run AI model inference on media to generate real-time road safety conclusions.'}
+        </p>
+      </div>
+    );
+  }
+
+  const riskLevel = fusion.risk_level?.toLowerCase() || 'unknown';
+
+  const riskBadgeMap: Record<string, { label: string; bg: string; text: string; icon: any }> = {
+    safe: {
+      label: 'SAFE ROAD CONDITION',
+      bg: 'bg-[#53D769]',
+      text: 'text-[#111111]',
+      icon: ShieldCheck
+    },
+    caution: {
+      label: 'CAUTION REQUIRED',
+      bg: 'bg-[#FFD84D]',
+      text: 'text-[#111111]',
+      icon: AlertTriangle
+    },
+    critical: {
+      label: 'HIGH RISK HAZARD',
+      bg: 'bg-[#FF5A5F]',
+      text: 'text-[#FFFFFF]',
+      icon: ShieldAlert
+    },
+    unknown: {
+      label: 'UNASSESSED',
+      bg: 'bg-[#FFFFFF]',
+      text: 'text-[#111111]',
+      icon: HelpCircle
+    }
+  };
+
+  const currentBadge = riskBadgeMap[riskLevel] || riskBadgeMap.unknown;
+  const BadgeIcon = currentBadge.icon;
+
+  return (
+    <div className="neo-card p-5 bg-[#FFFFFF] space-y-4">
+      <div className="flex items-center justify-between pb-2 border-b-2 border-[#111111]">
+        <h3 className="text-xs font-bold text-[#111111] uppercase tracking-wider font-display flex items-center gap-2">
+          <span className="w-2.5 h-2.5 bg-[#FFD84D] border border-[#111111]" />
+          AI ROAD SAFETY FUSION ASSESSMENT
+        </h3>
+        {fusion.processing_time_ms && (
+          <span className="text-[11px] font-mono font-bold text-[#111111]">
+            LATENCY: {fusion.processing_time_ms} MS
+          </span>
+        )}
+      </div>
+
+      {/* Risk Level & Score Box */}
+      <div className={`p-4 rounded-md border-3 border-[#111111] shadow-[4px_4px_0px_#111111] ${currentBadge.bg} flex items-center justify-between`}>
+        <div className="flex items-center gap-3">
+          <BadgeIcon className={`w-8 h-8 ${currentBadge.text} stroke-[2.5]`} />
+          <div>
+            <span className={`text-xs font-bold uppercase tracking-wider font-display ${currentBadge.text}`}>
+              {currentBadge.label}
+            </span>
+            <p className={`text-[11px] font-medium mt-0.5 ${currentBadge.text}`}>
+              Multi-model detection fusion output
+            </p>
+          </div>
+        </div>
+
+        {fusion.risk_score !== undefined && (
+          <div className="text-right bg-[#FFFFFF] px-3 py-1.5 rounded border-2 border-[#111111] shadow-[2px_2px_0px_#111111]">
+            <div className="text-2xl font-bold font-mono text-[#111111]">{fusion.risk_score}<span className="text-xs text-[#555555]">/100</span></div>
+            <span className="text-[9px] text-[#555555] font-mono font-bold uppercase block">Risk Score</span>
+          </div>
+        )}
+      </div>
+
+      {/* Warnings & Hazards List */}
+      <div className="space-y-2">
+        <h4 className="text-xs font-bold text-[#111111] uppercase tracking-wider flex items-center gap-1.5 font-display">
+          <Info className="w-4 h-4 text-[#4D7CFE] stroke-[2.5]" />
+          Safety Warnings & Road Hazards
+        </h4>
+        {fusion.warnings && fusion.warnings.length > 0 ? (
+          <ul className="space-y-2">
+            {fusion.warnings.map((w, idx) => (
+              <li
+                key={idx}
+                className="text-xs font-medium text-[#111111] bg-[#F7F7F2] p-3 rounded border-2 border-[#111111] shadow-[2px_2px_0px_#111111] flex items-start gap-2.5"
+              >
+                <span className="w-2 h-2 rounded-full bg-[#FFD84D] border border-[#111111] shrink-0 mt-1" />
+                <span>{w}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-xs text-[#555555] font-mono italic p-3 bg-[#F7F7F2] rounded border-2 border-[#111111]">
+            No specific safety warnings generated by Fusion Engine.
+          </p>
+        )}
+      </div>
+    </div>
+  );
+};

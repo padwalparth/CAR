@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #F7F7F2;
+    color: #111111;
+    overflow-x: hidden;
+  }
+
+  /* Custom high-contrast scrollbars */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #F7F7F2;
+    border-left: 2px solid #111111;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #111111;
+    border-radius: 0px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #FFD84D;
+  }
+}
+
+/* Neo-Brutalist Core Surface Classes */
+.neo-card {
+  background-color: #FFFFFF;
+  border: 3px solid #111111;
+  box-shadow: 5px 5px 0px #111111;
+  border-radius: 8px;
+}
+
+.neo-card-sm {
+  background-color: #FFFFFF;
+  border: 2px solid #111111;
+  box-shadow: 3px 3px 0px #111111;
+  border-radius: 6px;
+}
+
+.neo-card-lg {
+  background-color: #FFFFFF;
+  border: 3px solid #111111;
+  box-shadow: 8px 8px 0px #111111;
+  border-radius: 10px;
+}
+
+/* Tactile Physics Button Mechanics */
+.neo-btn-primary {
+  background-color: #FFD84D;
+  color: #111111;
+  border: 3px solid #111111;
+  box-shadow: 4px 4px 0px #111111;
+  font-weight: 700;
+  border-radius: 6px;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease;
+}
+
+.neo-btn-primary:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #111111;
+  background-color: #ffe066;
+}
+
+.neo-btn-primary:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px #111111;
+}
+
+.neo-btn-secondary {
+  background-color: #FFFFFF;
+  color: #111111;
+  border: 2px solid #111111;
+  box-shadow: 3px 3px 0px #111111;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease;
+}
+
+.neo-btn-secondary:hover {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0px #111111;
+  background-color: #F7F7F2;
+}
+
+.neo-btn-secondary:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0px 0px 0px #111111;
+}
+
+/* Input Fields */
+.neo-input {
+  background-color: #FFFFFF;
+  border: 2px solid #111111;
+  color: #111111;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.neo-input:focus {
+  outline: none;
+  box-shadow: 3px 3px 0px #4D7CFE;
+  border-color: #111111;
+}
+
+/* Neo-Brutalist Pill Badge */
+.neo-badge {
+  border: 2px solid #111111;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 4px;
+}

@@ -1,0 +1,5 @@
+# SIH 2026 Perception & Simulation Pipeline
+# Default: installs core dependencies required for mock mode, headless pipeline, and test suite.
+# To install full ML dependencies, run: pip install -r requirements-ml.txt
+
+-r requirements-core.txt

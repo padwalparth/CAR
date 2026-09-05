@@ -1,0 +1,29 @@
+# Model configurations for SIH 2026 Perception Pipeline
+# Paths point to the Best Model directory
+
+road_model:
+  backend: "onnx"
+  path: "../Best Model/Road-segmentation-UNET-model-main/models/onnx_models/road_seg_160_160.onnx"
+  fallback_keras_path: "../Best Model/Road-segmentation-UNET-model-main/models/pretrained_models/road_segmentation_160_160.h5"
+  input_size: [160, 160]
+  device: "cpu"
+  num_classes: 3
+  road_class_ids: [1, 2]
+
+traffic_model:
+  backend: "ultralytics"
+  path: "../Best Model/YOLOv8.3.0 Train on IDD/runs/idd_yolov8_training/weights/best.pt"
+  fallback_path: "../Best Model/YOLOv8.3.0 Train on IDD/yolov8m.pt"
+  input_size: [640, 640]
+  confidence: 0.35
+  iou: 0.70
+  device: "cpu"
+  classes_yaml: "../Best Model/YOLOv8.3.0 Train on IDD/idd_fixed.yaml"
+
+pothole_model:
+  backend: "res2net"
+  path: "../Best Model/pothole detection model/best_model.pt"
+  backbone: "res2net50d.in1k"
+  input_size: [128, 128]
+  device: "cpu"
+  min_box_size: 5.0

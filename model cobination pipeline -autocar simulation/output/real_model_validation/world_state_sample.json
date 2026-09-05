@@ -1,0 +1,245 @@
+{
+  "frame_id": 1,
+  "timestamp": 1788599878.8538055,
+  "environment": {
+    "image_width": 960,
+    "image_height": 540
+  },
+  "road": {
+    "confidence": 1.0,
+    "road_area_ratio": 0.1325,
+    "num_regions": 0,
+    "condition": {
+      "score": 52.97,
+      "category": "MODERATE",
+      "estimated_friction_factor": 0.85,
+      "speed_restriction_factor": 0.75,
+      "details": {
+        "base_score": 100.0,
+        "pothole_count": 1,
+        "pothole_count_penalty": 5.0,
+        "total_relative_pothole_area": 0.09992,
+        "pothole_area_penalty": 24.98,
+        "large_potholes_count": 1,
+        "severe_pothole_penalty": 10.0,
+        "road_coverage_penalty": 7.05,
+        "total_penalties": 47.03
+      }
+    }
+  },
+  "traffic": {
+    "vehicle_count": 3,
+    "vehicle_counts_by_class": {
+      "truck": 1,
+      "motorcycle": 1,
+      "car": 1
+    },
+    "pedestrian_count": 2,
+    "total_objects": 5,
+    "traffic_density": 0.7655,
+    "congestion_level": "HEAVY",
+    "vehicles": [
+      {
+        "object_id": 2,
+        "class_name": "truck",
+        "class_id": 13,
+        "confidence": 0.7349,
+        "bbox": {
+          "xmin": 407.366,
+          "ymin": 337.017,
+          "xmax": 440.536,
+          "ymax": 379.356,
+          "is_normalized": false,
+          "center": [
+            423.951,
+            358.187
+          ],
+          "bottom_center": [
+            423.951,
+            379.356
+          ],
+          "area": 1404.373
+        },
+        "center_x": 423.951,
+        "center_y": 358.187,
+        "track_id": 2,
+        "estimated_distance": null,
+        "road_association": 0.0,
+        "lane_id": null
+      },
+      {
+        "object_id": 4,
+        "class_name": "motorcycle",
+        "class_id": 6,
+        "confidence": 0.5829,
+        "bbox": {
+          "xmin": 464.852,
+          "ymin": 363.355,
+          "xmax": 476.534,
+          "ymax": 381.646,
+          "is_normalized": false,
+          "center": [
+            470.693,
+            372.501
+          ],
+          "bottom_center": [
+            470.693,
+            381.646
+          ],
+          "area": 213.68
+        },
+        "center_x": 470.693,
+        "center_y": 372.501,
+        "track_id": 4,
+        "estimated_distance": null,
+        "road_association": 0.8,
+        "lane_id": null
+      },
+      {
+        "object_id": 5,
+        "class_name": "car",
+        "class_id": 4,
+        "confidence": 0.5192,
+        "bbox": {
+          "xmin": 490.743,
+          "ymin": 359.842,
+          "xmax": 508.167,
+          "ymax": 372.759,
+          "is_normalized": false,
+          "center": [
+            499.455,
+            366.301
+          ],
+          "bottom_center": [
+            499.455,
+            372.759
+          ],
+          "area": 225.069
+        },
+        "center_x": 499.455,
+        "center_y": 366.301,
+        "track_id": 5,
+        "estimated_distance": null,
+        "road_association": 0.8,
+        "lane_id": null
+      }
+    ],
+    "pedestrians": [
+      {
+        "object_id": 1,
+        "class_name": "person",
+        "class_id": 7,
+        "confidence": 0.7614,
+        "bbox": {
+          "xmin": 435.697,
+          "ymin": 352.984,
+          "xmax": 454.311,
+          "ymax": 401.781,
+          "is_normalized": false,
+          "center": [
+            445.004,
+            377.382
+          ],
+          "bottom_center": [
+            445.004,
+            401.781
+          ],
+          "area": 908.344
+        },
+        "center_x": 445.004,
+        "center_y": 377.382,
+        "track_id": 1,
+        "estimated_distance": null,
+        "road_association": 0.733,
+        "lane_id": null
+      },
+      {
+        "object_id": 3,
+        "class_name": "rider",
+        "class_id": 8,
+        "confidence": 0.6181,
+        "bbox": {
+          "xmin": 464.886,
+          "ymin": 356.501,
+          "xmax": 476.925,
+          "ymax": 376.583,
+          "is_normalized": false,
+          "center": [
+            470.905,
+            366.542
+          ],
+          "bottom_center": [
+            470.905,
+            376.583
+          ],
+          "area": 241.756
+        },
+        "center_x": 470.905,
+        "center_y": 366.542,
+        "track_id": 3,
+        "estimated_distance": null,
+        "road_association": 0.033,
+        "lane_id": null
+      }
+    ],
+    "other_objects": []
+  },
+  "potholes": {
+    "count": 1,
+    "total_area_pixels": 51798.5,
+    "total_relative_area": 0.09992,
+    "severity_counts": {
+      "SMALL": 0,
+      "MEDIUM": 0,
+      "LARGE": 1
+    },
+    "potholes": [
+      {
+        "pothole_id": 1,
+        "confidence": 1.0,
+        "bbox": {
+          "xmin": 271.767,
+          "ymin": 271.364,
+          "xmax": 736.921,
+          "ymax": 382.722,
+          "is_normalized": false,
+          "center": [
+            504.344,
+            327.043
+          ],
+          "bottom_center": [
+            504.344,
+            382.722
+          ],
+          "area": 51798.469
+        },
+        "center_x": 504.344,
+        "center_y": 327.043,
+        "area_pixels": 51798.5,
+        "relative_area": 0.09992,
+        "estimated_severity": "LARGE",
+        "road_association": 0.0,
+        "estimated_distance": null
+      }
+    ]
+  },
+  "perception_status": {
+    "road": "ok",
+    "traffic": "ok",
+    "pothole": "ok",
+    "errors": {}
+  },
+  "metadata": {
+    "processing_time_ms": 577.45,
+    "road_inference_ms": 37.56,
+    "traffic_inference_ms": 499.06,
+    "pothole_inference_ms": 40.32,
+    "fusion_ms": 0.51,
+    "fps": 1.7,
+    "model_versions": {
+      "road": "unet_road_segmentation:onnx",
+      "traffic": "yolo_idd_traffic_detector:ultralytics",
+      "pothole": "res2net_pothole_detector:res2net"
+    }
+  }
+}

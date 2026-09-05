@@ -1,0 +1,63 @@
+pipeline:
+  execution_mode: parallel # Options: parallel, sequential
+
+confidence_thresholds:
+  traffic: 0.35
+  pothole: 0.40
+
+road_association:
+  min_overlap: 0.30
+  center_weight: 0.50
+  overlap_weight: 0.50
+  traffic_bottom_center_weight: 0.70
+  traffic_overlap_weight: 0.30
+  traffic_min_association: 0.25
+
+tracking:
+  enabled: true
+  min_iou: 0.25
+  max_disappeared_frames: 5
+  max_centroid_distance_norm: 0.15
+
+pothole_severity:
+  # Relative area thresholds (box area / total image area)
+  # Camera bounding boxes alone do NOT indicate physical depth.
+  small_max_relative_area: 0.015
+  medium_max_relative_area: 0.045
+
+traffic_analysis:
+  # Congestion level thresholds based on traffic density [0.0 - 1.0]
+  congestion_thresholds:
+    moderate_density: 0.25
+    heavy_density: 0.60
+    gridlock_density: 0.85
+  # Approximate reference vehicle capacity for a single camera scene
+  scene_capacity_vehicles: 12
+
+road_condition:
+  # Road condition score = 100 - (penalties)
+  weights:
+    base_score: 100.0
+    pothole_count_penalty: 5.0
+    pothole_relative_area_penalty: 250.0
+    severe_pothole_penalty: 10.0
+    road_coverage_penalty: 15.0
+  thresholds:
+    good_min_score: 80.0
+    moderate_min_score: 50.0
+    poor_min_score: 25.0
+  simulation_mapping:
+    friction_factors:
+      GOOD: 1.00
+      MODERATE: 0.85
+      POOR: 0.65
+      CRITICAL: 0.40
+    speed_restrictions:
+      GOOD: 1.00
+      MODERATE: 0.75
+      POOR: 0.50
+      CRITICAL: 0.25
+
+preprocessing:
+  normalize_coordinates: true
+  clip_to_frame: true

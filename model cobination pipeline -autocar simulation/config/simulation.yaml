@@ -1,0 +1,21 @@
+# Simulator Mapping & Telemetry Configuration
+
+mock_simulator:
+  log_level: "INFO"
+  enable_console_telemetry: true
+  track_history_length: 50
+
+scenario_mapping:
+  speed_restrictions:
+    GOOD: 1.0
+    MODERATE: 0.75
+    POOR: 0.50
+    CRITICAL: 0.25
+  friction_factors:
+    GOOD: 1.00
+    MODERATE: 0.85
+    POOR: 0.65
+    CRITICAL: 0.40
+  hazard_spawning:
+    potholes_as_obstacles: true
+    min_pothole_severity_for_hazard: "MEDIUM"
