@@ -51,6 +51,8 @@ class RoadAdapter:
         # Convert to binary drivable mask: 1 where pixel class in road_class_ids or arr > 0
         if arr.dtype == bool:
             binary_mask = arr.astype(np.uint8)
+        elif len(np.unique(arr)) <= 2 and set(np.unique(arr)).issubset({0, 1}):
+            binary_mask = (arr > 0).astype(np.uint8)
         else:
             binary_mask = np.isin(arr, road_class_ids).astype(np.uint8)
 

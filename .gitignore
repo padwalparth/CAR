@@ -22,3 +22,26 @@ __pycache__/
 
 # Dataset images (too large for GitHub)
 IDDDetectionsYOLODataset/
+Best Model/Road-segmentation-UNET-model-main/data/
+
+# Runtime uploads and masks
+**/uploads/
+**/output/masks/
+*.jpg
+*.jpeg
+*.png
+
+# Video and training artifacts
+*.avi
+*.mp4
+*.tfevents*
+runs/detect/predict/
+
+# Temporary debug scripts
+debug_*.py
+diagnose_*.py
+temp_*.jpg
+test_road_*.py
+train_road_*.py
+train_and_export_fast.py
+upload_and_start.py

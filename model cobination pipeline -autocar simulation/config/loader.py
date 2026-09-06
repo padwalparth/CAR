@@ -168,6 +168,14 @@ def validate_pipeline_config(cfg: Dict[str, Any]) -> None:
 def load_models_config(path: str = "config/models.yaml") -> Dict[str, Any]:
     cfg = load_yaml_file(path)
     validate_models_config(cfg)
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(path)))
+    for model_key in ["road_model", "traffic_model", "pothole_model"]:
+        if model_key in cfg and isinstance(cfg[model_key], dict):
+            for path_key in ["path", "fallback_path", "fallback_keras_path", "classes_yaml"]:
+                if path_key in cfg[model_key] and isinstance(cfg[model_key][path_key], str):
+                    p = cfg[model_key][path_key]
+                    if not os.path.isabs(p):
+                        cfg[model_key][path_key] = os.path.normpath(os.path.join(base_dir, p))
     return cfg
 
 

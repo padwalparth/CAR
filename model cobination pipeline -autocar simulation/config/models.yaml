@@ -4,11 +4,10 @@
 road_model:
   backend: "onnx"
   path: "../Best Model/Road-segmentation-UNET-model-main/models/onnx_models/road_seg_160_160.onnx"
-  fallback_keras_path: "../Best Model/Road-segmentation-UNET-model-main/models/pretrained_models/road_segmentation_160_160.h5"
   input_size: [160, 160]
   device: "cpu"
-  num_classes: 3
-  road_class_ids: [1, 2]
+  threshold: 0.35
+  multiscale: true
 
 traffic_model:
   backend: "ultralytics"
@@ -21,9 +20,10 @@ traffic_model:
   classes_yaml: "../Best Model/YOLOv8.3.0 Train on IDD/idd_fixed.yaml"
 
 pothole_model:
-  backend: "res2net"
-  path: "../Best Model/pothole detection model/best_model.pt"
-  backbone: "res2net50d.in1k"
-  input_size: [128, 128]
+  backend: "yolo"
+  path: "../Best Model/Potholes-Detection-YOLOv11/Potholes-Detection-YOLOv11/runs/detect/train/weights/best.pt"
+  confidence: 0.30     # Only detections with YOLO score >= 30% are kept
+  iou: 0.45            # NMS IoU threshold
+  max_detections: 20   # Maximum potholes per frame
   device: "cpu"
-  min_box_size: 5.0
+

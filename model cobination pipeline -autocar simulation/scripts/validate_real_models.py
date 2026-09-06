@@ -139,7 +139,7 @@ def run_stage_1_individual_models(models_cfg: Dict[str, Any], frame: np.ndarray)
     print(f"  - Unique Classes: {unique_classes}")
     print(f"  - Latency:        {road_model.last_inference_time_ms:.2f} ms")
 
-    assert mask.shape == tuple(models_cfg["road_model"]["input_size"]), "Mask shape mismatch"
+    assert mask.shape in (tuple(models_cfg["road_model"]["input_size"]), frame.shape[:2]), "Mask shape mismatch"
     assert all(c in [0, 1, 2] for c in unique_classes), f"Unexpected classes: {unique_classes}"
     results["road"] = {
         "status": "PASS",

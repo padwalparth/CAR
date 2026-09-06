@@ -48,7 +48,7 @@ class PotholeAdapter:
         orig_shape = (720, 1280)
 
         if isinstance(raw_output, dict):
-            raw_boxes = raw_output.get("pothole_boxes", [])
+            raw_boxes = raw_output.get("pothole_boxes") or raw_output.get("potholes") or []
             orig_shape = raw_output.get("orig_shape", (720, 1280))
         elif isinstance(raw_output, list):
             raw_boxes = raw_output

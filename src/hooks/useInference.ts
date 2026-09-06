@@ -10,6 +10,7 @@ import {
   startSessionAnalysis,
   cancelInferenceSession
 } from '../services/api/inference';
+import { AnalysisSubTab } from '../components/analysis/AnalysisTabs';
 
 export function useInference() {
   const [session, setSession] = useState<InferenceSession | null>(null);
@@ -17,8 +18,9 @@ export function useInference() {
   const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+
   // Active sub-tab inside Analyze workspace
-  const [activeTab, setActiveTab] = useState<'overview' | 'traffic' | 'segmentation' | 'potholes' | 'safety'>('overview');
+  const [activeTab, setActiveTab] = useState<AnalysisSubTab>('overview');
 
   // Visualization settings
   const [activeLayer, setActiveLayer] = useState<LayerType>('combined');

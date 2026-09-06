@@ -1,7 +1,7 @@
 import React from 'react';
-import { LayoutGrid, Car, Layers, AlertCircle, ShieldCheck, PlayCircle } from 'lucide-react';
+import { LayoutGrid, Car, Layers, AlertCircle, ShieldCheck, PlayCircle, BrainCircuit } from 'lucide-react';
 
-export type AnalysisSubTab = 'overview' | 'traffic' | 'segmentation' | 'potholes' | 'safety';
+export type AnalysisSubTab = 'overview' | 'traffic' | 'segmentation' | 'potholes' | 'safety' | 'explainability';
 
 interface AnalysisTabsProps {
   activeTab: AnalysisSubTab;
@@ -20,12 +20,13 @@ export const AnalysisTabs: React.FC<AnalysisTabsProps> = ({
   counts,
   onNavigateToSimulation
 }) => {
-  const tabs: { key: AnalysisSubTab; label: string; icon: any; count?: string | number }[] = [
+  const tabs: { key: AnalysisSubTab; label: string; icon: any; count?: string | number; badge?: string }[] = [
     { key: 'overview', label: 'OVERVIEW', icon: LayoutGrid },
     { key: 'traffic', label: 'TRAFFIC OBJECTS', icon: Car, count: counts?.objects },
     { key: 'segmentation', label: 'ROAD SEGMENTATION', icon: Layers, count: counts?.coverage ? `${(counts.coverage * 100).toFixed(0)}%` : undefined },
     { key: 'potholes', label: 'POTHOLES', icon: AlertCircle, count: counts?.potholes },
-    { key: 'safety', label: 'SAFETY / FUSION', icon: ShieldCheck }
+    { key: 'safety', label: 'SAFETY / FUSION', icon: ShieldCheck },
+    { key: 'explainability', label: 'EXPLAINABLE AI (XAI)', icon: BrainCircuit, badge: 'XAI' }
   ];
 
   return (
@@ -46,6 +47,11 @@ export const AnalysisTabs: React.FC<AnalysisTabsProps> = ({
             >
               <Icon className="w-4 h-4 stroke-[2.5]" />
               <span>{tab.label}</span>
+              {tab.badge && (
+                <span className="px-1.5 py-0.2 rounded text-[9px] font-black bg-[#A259FF] text-white border border-[#111111] shadow-[1px_1px_0px_#111111]">
+                  {tab.badge}
+                </span>
+              )}
               {tab.count !== undefined && (
                 <span
                   className={`px-1.5 py-0.5 rounded text-[10px] border border-[#111111] font-mono ${

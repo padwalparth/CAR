@@ -17,14 +17,14 @@ This report documents the empirical operational validation, latency benchmarking
 ## 2. Environment & Checkpoint Snapshot
 
 ### Runtime Environment
-- **Python**: 3.11.16 (64bit (AMD64))
-- **OS**: Windows 10
+- **Python**: 3.12.4 (64bit (AMD64))
+- **OS**: Windows 11
 - **PyTorch**: 2.14.0+cpu
 - **TorchVision**: 0.29.0+cpu
 - **timm**: 1.0.29
-- **Ultralytics**: 8.4.140
+- **Ultralytics**: 8.4.142
 - **ONNX Runtime**: 1.29.0 (Providers: AzureExecutionProvider, CPUExecutionProvider)
-- **OpenCV**: 5.0.0
+- **OpenCV**: 4.13.0
 - **Hardware Acceleration**: CUDA Not Enabled (CPU Runtime)
 
 ### Model Checkpoints
@@ -40,21 +40,21 @@ This report documents the empirical operational validation, latency benchmarking
 
 ### 3.1 Road Segmentation (U-Net)
 - **Status**: PASS
-- **Raw Mask Shape**: [160, 160]
-- **Observed Unique Classes**: [0, 2] (Matches 3-class contract: background=0, lane=1, road=2)
-- **Standalone Latency**: 28.8 ms
+- **Raw Mask Shape**: [540, 960]
+- **Observed Unique Classes**: [1] (Matches 3-class contract: background=0, lane=1, road=2)
+- **Standalone Latency**: 163.27 ms
 
 ### 3.2 Traffic Detection (YOLO IDD)
 - **Status**: PASS
 - **Detections Observed**: 5
 - **Class Mapping**: Confirmed all predicted class IDs map within `[0, 14]` across the 15 IDD categories.
-- **Standalone Latency**: 490.85 ms
+- **Standalone Latency**: 2438.71 ms
 
 ### 3.3 Pothole Detection (Res2Net)
 - **Status**: PASS
 - **Architecture**: Single-bbox regression model (`res2net50d.in1k`).
 - **Confidence Handling**: Explicitly assigned as **synthetic/estimated confidence (1.0)** by design; the model architecture regresses 4 spatial coordinates directly without an independent classification branch.
-- **Standalone Latency**: 70.19 ms
+- **Standalone Latency**: 1302.43 ms
 
 ---
 
@@ -81,14 +81,14 @@ Measured over **20 iterations** (preceded by **5 warm-up iterations** excluded f
 
 | Subsystem | Mean Latency (ms) | Min Latency (ms) | Max Latency (ms) | Std Dev (ms) |
 |---|---|---|---|---|
-| **Road Segmentation (U-Net ONNX)** | 29.69 | 26.91 | 42.13 | 3.85 |
-| **Traffic Detection (YOLO IDD)** | 441.07 | 337.75 | 580.8 | 68.72 |
-| **Pothole Detection (Res2Net)** | 57.57 | 36.81 | 95.13 | 19.33 |
-| **Perception Fusion** | 0.48 | 0.34 | 1.01 | 0.13 |
-| **End-to-End Total** | **529.68** | **461.84** | **664.68** | **58.21** |
+| **Road Segmentation (U-Net ONNX)** | 151.67 | 117.26 | 252.33 | 29.3 |
+| **Traffic Detection (YOLO IDD)** | 1443.31 | 980.38 | 2684.7 | 441.66 |
+| **Pothole Detection (Res2Net)** | 1072.42 | 700.51 | 1806.13 | 300.63 |
+| **Perception Fusion** | 0.85 | 0.72 | 1.17 | 0.13 |
+| **End-to-End Total** | **1462.02** | **988.11** | **2730.76** | **442.51** |
 
 ### Effective Throughput
-- **End-to-End CPU Framerate**: **1.89 FPS**
+- **End-to-End CPU Framerate**: **0.68 FPS**
 - **Hardware Profile**: AMD64 CPU execution.
 
 ---

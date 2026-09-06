@@ -1,57 +1,57 @@
 {
   "environment": {
-    "python_version": "3.11.16",
+    "python_version": "3.12.4",
     "architecture": "64bit (AMD64)",
-    "os": "Windows 10",
+    "os": "Windows 11",
     "torch_version": "2.14.0+cpu",
     "cuda_available": false,
     "cuda_device_name": "N/A",
     "cuda_device_count": 0,
     "torchvision_version": "0.29.0+cpu",
     "timm_version": "1.0.29",
-    "ultralytics_version": "8.4.140",
+    "ultralytics_version": "8.4.142",
     "onnxruntime_version": "1.29.0",
     "onnxruntime_providers": [
       "AzureExecutionProvider",
       "CPUExecutionProvider"
     ],
-    "opencv_version": "5.0.0"
+    "opencv_version": "4.13.0"
   },
   "benchmarks": {
     "iterations_measured": 20,
     "warmup_iterations": 5,
     "cpu_benchmark": {
       "road_segmentation": {
-        "mean_ms": 29.69,
-        "min_ms": 26.91,
-        "max_ms": 42.13,
-        "std_ms": 3.85
+        "mean_ms": 151.67,
+        "min_ms": 117.26,
+        "max_ms": 252.33,
+        "std_ms": 29.3
       },
       "traffic_detection": {
-        "mean_ms": 441.07,
-        "min_ms": 337.75,
-        "max_ms": 580.8,
-        "std_ms": 68.72
+        "mean_ms": 1443.31,
+        "min_ms": 980.38,
+        "max_ms": 2684.7,
+        "std_ms": 441.66
       },
       "pothole_detection": {
-        "mean_ms": 57.57,
-        "min_ms": 36.81,
-        "max_ms": 95.13,
-        "std_ms": 19.33
+        "mean_ms": 1072.42,
+        "min_ms": 700.51,
+        "max_ms": 1806.13,
+        "std_ms": 300.63
       },
       "perception_fusion": {
-        "mean_ms": 0.48,
-        "min_ms": 0.34,
-        "max_ms": 1.01,
+        "mean_ms": 0.85,
+        "min_ms": 0.72,
+        "max_ms": 1.17,
         "std_ms": 0.13
       },
       "end_to_end": {
-        "mean_ms": 529.68,
-        "min_ms": 461.84,
-        "max_ms": 664.68,
-        "std_ms": 58.21
+        "mean_ms": 1462.02,
+        "min_ms": 988.11,
+        "max_ms": 2730.76,
+        "std_ms": 442.51
       },
-      "fps": 1.89
+      "fps": 0.68
     },
     "cuda_benchmark": "N/A (PyTorch installed with CPU-only runtime; CUDA benchmark not executed)"
   }

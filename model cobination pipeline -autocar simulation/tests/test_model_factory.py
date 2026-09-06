@@ -58,10 +58,10 @@ class TestModelFactory(unittest.TestCase):
         with self.assertRaises(FileNotFoundError):
             pothole_m.load()
 
-    def test_future_yolo_pothole_stub_raises_not_implemented(self):
-        yolo_p = create_pothole_model({"backend": "yolo"})
-        with self.assertRaises(NotImplementedError):
-            yolo_p.load()
+    def test_yolo_pothole_model_creation(self):
+        yolo_p = create_pothole_model({"backend": "yolo", "path": "some/path.pt"})
+        self.assertIsInstance(yolo_p, YOLOPotholeModel)
+        self.assertEqual(yolo_p.backend, "yolo")
 
 
 if __name__ == "__main__":

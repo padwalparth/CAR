@@ -17,17 +17,17 @@ from models.pothole_detection.yolo_pothole_model import YOLOPotholeModel
 def create_road_model(config: Dict[str, Any]) -> BasePerceptionModel:
     """
     Factory creating the configured road segmentation model runner.
-    Supported backends: 'onnx', 'keras', 'mock'.
+    Supported backends: 'pytorch', 'torch', 'onnx', 'keras', 'mock'.
     """
-    backend = str(config.get("backend", "onnx")).lower()
-    if backend in ("onnx", "keras"):
+    backend = str(config.get("backend", "pytorch")).lower()
+    if backend in ("pytorch", "torch", "onnx", "keras"):
         return UNetRoadModel(config)
     elif backend == "mock":
         return MockRoadModel(config)
     else:
         raise ValueError(
             f"Unsupported road segmentation backend: '{backend}'. "
-            f"Available backends: ['onnx', 'keras', 'mock']."
+            f"Available backends: ['pytorch', 'torch', 'onnx', 'keras', 'mock']."
         )
 
 

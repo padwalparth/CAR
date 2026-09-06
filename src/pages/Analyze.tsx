@@ -6,6 +6,8 @@ import { CanvasViewer } from '../components/analysis/CanvasViewer';
 import { AnalysisTabs, AnalysisSubTab } from '../components/analysis/AnalysisTabs';
 import { FusionSummary } from '../components/analysis/FusionSummary';
 import { DetectionList } from '../components/analysis/DetectionList';
+import { AIReportPanel } from '../components/analysis/AIReportPanel';
+import { ExplainableAIPanel } from '../components/analysis/ExplainableAIPanel';
 import { ErrorBanner } from '../components/common/ErrorBanner';
 import { Layers, Sparkles } from 'lucide-react';
 
@@ -123,34 +125,38 @@ export const AnalyzePage: React.FC<AnalyzePageProps> = ({ onNavigateToSimulation
         <>
           {/* TAB 1: OVERVIEW WORKSPACE */}
           {activeTab === 'overview' && (
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2 space-y-6">
-                <CanvasViewer
-                  mediaUrl={result.input.media_url}
-                  mediaType={result.input.media_type}
-                  yoloDetections={filteredYoloDetections}
-                  potholeDetections={filteredPotholeDetections}
-                  roadMaskUrl={result.road_segmentation.mask_url}
-                  activeLayer={activeLayer}
-                  onLayerChange={setActiveLayer}
-                  maskOpacity={maskOpacity}
-                  onOpacityChange={setMaskOpacity}
-                  selectedDetectionId={selectedDetectionId}
-                  onSelectDetection={setSelectedDetectionId}
-                />
-                <FusionSummary fusion={result.fusion} />
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="lg:col-span-2 space-y-6">
+                  <CanvasViewer
+                    mediaUrl={result.input.media_url}
+                    mediaType={result.input.media_type}
+                    yoloDetections={filteredYoloDetections}
+                    potholeDetections={filteredPotholeDetections}
+                    roadMaskUrl={result.road_segmentation.mask_url}
+                    activeLayer={activeLayer}
+                    onLayerChange={setActiveLayer}
+                    maskOpacity={maskOpacity}
+                    onOpacityChange={setMaskOpacity}
+                    selectedDetectionId={selectedDetectionId}
+                    onSelectDetection={setSelectedDetectionId}
+                  />
+                  <FusionSummary fusion={result.fusion} />
+                </div>
+                <div className="lg:col-span-1">
+                  <DetectionList
+                    yoloDetections={filteredYoloDetections}
+                    potholeDetections={filteredPotholeDetections}
+                    availableClasses={availableYoloClasses}
+                    selectedDetectionId={selectedDetectionId}
+                    onSelectDetection={setSelectedDetectionId}
+                    confidenceThreshold={confidenceThreshold}
+                    onConfidenceChange={setConfidenceThreshold}
+                  />
+                </div>
               </div>
-              <div className="lg:col-span-1">
-                <DetectionList
-                  yoloDetections={filteredYoloDetections}
-                  potholeDetections={filteredPotholeDetections}
-                  availableClasses={availableYoloClasses}
-                  selectedDetectionId={selectedDetectionId}
-                  onSelectDetection={setSelectedDetectionId}
-                  confidenceThreshold={confidenceThreshold}
-                  onConfidenceChange={setConfidenceThreshold}
-                />
-              </div>
+              {/* AI Report Panel — full width below the main grid */}
+              <AIReportPanel sessionId={session!.id} />
             </div>
           )}
 
@@ -266,25 +272,72 @@ export const AnalyzePage: React.FC<AnalyzePageProps> = ({ onNavigateToSimulation
 
           {/* TAB 5: SAFETY / FUSION VIEW */}
           {activeTab === 'safety' && (
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2">
-                <CanvasViewer
-                  mediaUrl={result.input.media_url}
-                  mediaType={result.input.media_type}
-                  yoloDetections={filteredYoloDetections}
-                  potholeDetections={filteredPotholeDetections}
-                  roadMaskUrl={result.road_segmentation.mask_url}
-                  activeLayer="combined"
-                  onLayerChange={setActiveLayer}
-                  maskOpacity={maskOpacity}
-                  onOpacityChange={setMaskOpacity}
-                  selectedDetectionId={selectedDetectionId}
-                  onSelectDetection={setSelectedDetectionId}
-                />
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="lg:col-span-2">
+                  <CanvasViewer
+                    mediaUrl={result.input.media_url}
+                    mediaType={result.input.media_type}
+                    yoloDetections={filteredYoloDetections}
+                    potholeDetections={filteredPotholeDetections}
+                    roadMaskUrl={result.road_segmentation.mask_url}
+                    activeLayer="combined"
+                    onLayerChange={setActiveLayer}
+                    maskOpacity={maskOpacity}
+                    onOpacityChange={setMaskOpacity}
+                    selectedDetectionId={selectedDetectionId}
+                    onSelectDetection={setSelectedDetectionId}
+                  />
+                </div>
+                <div>
+                  <FusionSummary fusion={result.fusion} />
+                </div>
               </div>
-              <div>
-                <FusionSummary fusion={result.fusion} />
+              {/* AI Report Panel — full width below */}
+              <AIReportPanel sessionId={session!.id} />
+            </div>
+          )}
+
+          {/* TAB 6: EXPLAINABLE AI (XAI) VIEW */}
+          {activeTab === 'explainability' && (
+            <div className="space-y-6">
+              {/* Perception Visualizer on Top */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="lg:col-span-2">
+                  <CanvasViewer
+                    mediaUrl={result.input.media_url}
+                    mediaType={result.input.media_type}
+                    yoloDetections={filteredYoloDetections}
+                    potholeDetections={filteredPotholeDetections}
+                    roadMaskUrl={result.road_segmentation.mask_url}
+                    activeLayer="combined"
+                    onLayerChange={setActiveLayer}
+                    maskOpacity={maskOpacity}
+                    onOpacityChange={setMaskOpacity}
+                    selectedDetectionId={selectedDetectionId}
+                    onSelectDetection={setSelectedDetectionId}
+                  />
+                </div>
+                <div>
+                  <FusionSummary fusion={result.fusion} />
+                </div>
               </div>
+
+              {/* Full Explainable AI (XAI) Suite */}
+              <ExplainableAIPanel
+                sessionId={session!.id}
+                roadCoverage={
+                  result.road_segmentation.coverage_percent !== undefined
+                    ? result.road_segmentation.coverage_percent
+                    : (result.road_segmentation.coverage_ratio ?? 0.65) * 100
+                }
+                yoloCount={result.yolo?.detections?.length ?? 0}
+                potholeCount={result.potholes?.detections?.length ?? 0}
+                riskScore={result.fusion?.risk_score ?? 25}
+              />
+
+              {/* AI Safety Report & Reasoning Panel */}
+              <AIReportPanel sessionId={session!.id} />
             </div>
           )}
         </>
